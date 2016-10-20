@@ -3,7 +3,7 @@
 let error = require('mue-core/modules/error');
 
 module.exports = function (app) {
-    app.get('/', function (request, response, next) {
+    app.get('/signin', function (request, response, next) {
         var session = request.session;
 
         if (session.views) {
@@ -13,12 +13,6 @@ module.exports = function (app) {
         }
 
         response.render('layout', {
-            views: session.views
-        });
-    });
-
-    app.get('/signin', function (request, response, next) {
-        response.render('pages/signin', {
             views: session.views
         });
     });

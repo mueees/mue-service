@@ -14,6 +14,8 @@ let config = require('config');
 
 let helmet = require('helmet');
 let session = require('express-session');
+let express = require('express');
+let path = require('path');
 
 // start api server
 require('mue-core/modules/api-server')({
@@ -24,12 +26,17 @@ require('mue-core/modules/api-server')({
         //protect app from some well-known web vulnerabilities by setting HTTP headers appropriately
         app.use(helmet());
 
+        app.use(express.static('../mue-client'));
+
+        app.use('/m', express.static(__dirname + '/public'));
+
         app.use(
             session({
                 secret: '7!_-dsr', // TODO: move to secret place
                 name: 'sessionId',
                 saveUninitialized: false,
                 resave: false,
+
                 cookie: {
                     // Ensures the cookie is sent only over HTTP(S), not client JavaScript, helping to protect against
                     // cross-site scripting attacks
@@ -58,6 +65,7 @@ require('mue-core/modules/api-server')({
 
 // connect to DB
 // TODO: uncomment after
+
 /*
  require('modules/db').initConnection({
  port: config.get('db:port'),
