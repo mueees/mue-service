@@ -3,6 +3,16 @@
 let error = require('mue-core/modules/error');
 
 module.exports = function (app) {
+    app.get('/signup?:continue', function (request, response, next) {
+        response.render('pages/signup', {
+
+        });
+    });
+
+    app.post('/signup', function (request, response, next) {
+
+    });
+
     app.get('/signin', function (request, response, next) {
         var session = request.session;
 
@@ -18,10 +28,6 @@ module.exports = function (app) {
     });
 
     app.post('/signin?:continue', function (request, response, next) {
-
-    });
-
-    app.post('/signup:continue', function (request, response, next) {
 
     });
 
