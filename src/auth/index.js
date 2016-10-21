@@ -15,7 +15,12 @@ passport.deserializeUser(function(id, done) {
     done(null, user);
 });
 
+/*Initialize actions*/
+require('mue-core/modules/actions/request-to-service');
+
+
 /*Initialize strategies*/
+require('./strategies/local-signin');
 require('./strategies/local-signup');
 
 exports.middlewares = {
