@@ -10,12 +10,18 @@ if (process.env.NODE_ENV == 'development') {
 }
 
 /*RUN STAGE*/
+let path = require('path');
+
 let config = require('config');
 
+let express = require('express');
 let helmet = require('helmet');
 let session = require('express-session');
-let express = require('express');
-let path = require('path');
+let cookieParser = require('cookie-parser');
+let bodyParser = require('body-parser');
+
+/*Modules*/
+let auth = require('./auth');
 
 // start api server
 require('mue-core/modules/api-server')({
@@ -27,8 +33,10 @@ require('mue-core/modules/api-server')({
         app.use(helmet());
 
         app.use(express.static('../mue-client'));
-
         app.use('/m', express.static(__dirname + '/public'));
+
+        app.use(cookieParser());
+        app.use(bodyParser.urlencoded({ extended: false }));
 
         app.use(
             session({
@@ -48,6 +56,8 @@ require('mue-core/modules/api-server')({
             })
         );
 
+        auth.initialize(app);
+
         // initialize routes
         require('./routes')(app);
 
@@ -66,9 +76,8 @@ require('mue-core/modules/api-server')({
 // connect to DB
 // TODO: uncomment after
 
-/*
- require('modules/db').initConnection({
+require('modules/db').initConnection({
  port: config.get('db:port'),
  name: config.get('db:name'),
  host: config.get('db:host')
- });*/
+});

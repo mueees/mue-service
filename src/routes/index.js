@@ -1,34 +1,33 @@
 'use strict';
 
 let error = require('mue-core/modules/error');
+let config = require('../config');
+let auth = require('../auth');
 
 module.exports = function (app) {
-    app.get('/signup?:continue', function (request, response, next) {
-        response.render('pages/signup', {
-
-        });
+    app.get('/signup?:continue', auth.middlewares.skipSignInUser,  function (request, response, next) {
+        response.render('pages/signup', {});
     });
 
-    app.post('/signup', function (request, response, next) {
+    app.post('/signup', auth.middlewares.localSignUp, function (request, response, next){
+        let redirectUrl = request.query.continue || config.get('config:urls:redirectAfterSignUp');
 
+        response.redirect(redirectUrl);
     });
 
-    app.get('/signin', function (request, response, next) {
-        var session = request.session;
-
-        if (session.views) {
-            session.views += 1;
-        } else {
-            session.views = 1;
-        }
-
-        response.render('layout', {
-            views: session.views
-        });
+    app.get('/signin', auth.middlewares.skipSignInUser, function (request, response, next) {
+        response.render('pages/signin', {});
     });
 
-    app.post('/signin?:continue', function (request, response, next) {
+    app.post('/signin?:continue', auth.middlewares.localSignIn, function (request, response, next) {
+        let redirectUrl = request.query.continue || config.get('config:urls:redirectAfterSignIn');
 
+        response.redirect(redirectUrl);
+    });
+
+    app.get('/logout', function (request, response, next) {
+        request.logout();
+        response.redirect(config.get('config:urls:redirectAfterLogout'));
     });
 
     /*OAUTH 2*/

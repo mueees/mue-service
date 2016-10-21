@@ -18,7 +18,9 @@
   "homepage": "https://github.com/mueees/mue-service#readme",
   "dependencies": {
     "app-module-path": "^1.1.0",
+    "body-parser": "^1.15.2",
     "chai": "3.5.0",
+    "cookie-parser": "^1.4.3",
     "eslint": "^2.13.0",
     "express-session": "^1.14.1",
     "helmet": "^2.3.0",
@@ -27,6 +29,8 @@
     "mocha": "^2.5.3",
     "mongoose": "^4.4.20",
     "mue-core": "git+https://github.com/mueees/mue-core.git",
-    "nconf": "^0.8.4"
+    "nconf": "^0.8.4",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0"
   }
 }

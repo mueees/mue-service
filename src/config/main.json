@@ -1,4 +1,12 @@
 {
   "name": "mue",
-  "description": "Mue server project"
+  "description": "Mue server project",
+
+  "config": {
+    "urls": {
+      "redirectAfterSignIn": "/",
+      "redirectAfterSignUp": "/",
+      "redirectAfterLogout": "/"
+    }
+  }
 }

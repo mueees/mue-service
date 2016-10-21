@@ -1,0 +1,11 @@
+extends ../layout
+block content
+    h1 Signin
+    div
+        form(method="POST")
+            div
+                input(type="text", name="email", required="true")
+            div
+                input(type="password", name="password", required="true")
+            div
+                button(type="submit") Signin
