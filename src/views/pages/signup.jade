@@ -1,6 +1,12 @@
 extends ../layout
 block content
     h1 Signup
+
+    if locals.errorMessage
+        p #{locals.errorMessage}
+    if locals.successMessage
+        p #{locals.successMessage}
+
     div
         form(method="POST")
             div

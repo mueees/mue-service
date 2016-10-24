@@ -11,9 +11,9 @@ passport.use('local-signup', new LocalStrategy({
         passReqToCallback : true
     },
     function(request, email, password, done) {
-        let user = {
-            id: 123
-        };
+        /**
+         * done(err, user, info)
+         * */
 
         action.execute('requestToService', {
             service: 'account',
@@ -24,11 +24,9 @@ passport.use('local-signup', new LocalStrategy({
                 password: password
             }
         }).then(function () {
-            done(null, user);
+            done(null, null, null);
         }).catch(function (error) {
-            done(null, null, {
-                message: 'Cannot signup user'
-            });
+            done(error, null, null);
         });
     }
 ));
