@@ -23,6 +23,7 @@ switch (true) {
 }
 
 config.file('mue.main', {file: path.join(__dirname, 'main.json')});
+config.file('mue.secret', {file: path.join(__dirname, 'secret.json')});
 config.file('mue.configFile', {file: path.join(__dirname, configFile)});
 
 module.exports = config;

@@ -23,9 +23,9 @@ passport.use('local-signup', new LocalStrategy({
                 email: email,
                 password: password
             }
-        }).then(function () {
-            done(null, null, null);
-        }).catch(function (error) {
+        }).then(function (user) {
+            done(null, user, null);
+        }, function (error) {
             done(error, null, null);
         });
     }

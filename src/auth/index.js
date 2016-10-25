@@ -5,12 +5,12 @@ let passport = require('passport');
 let assert = require('mue-core/modules/assert');
 
 passport.serializeUser(function(user, done) {
-    done(null, user.id);
+    done(null, user._id);
 });
 
 passport.deserializeUser(function(id, done) {
     let user = {
-        id: 123
+        _id: 123
     };
 
     done(null, user);
@@ -18,7 +18,6 @@ passport.deserializeUser(function(id, done) {
 
 /*Initialize actions*/
 require('mue-core/modules/actions/request-to-service');
-
 
 /*Initialize strategies*/
 require('./strategies/local-signin');
