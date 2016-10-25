@@ -5,6 +5,7 @@
     "name": "mue"
   },
   "network": {
-    "port": 20004
+    "port": 20004,
+    "hostName": "mue.in.ua"
   }
 }

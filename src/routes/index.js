@@ -10,6 +10,7 @@ let config = require('../config');
 let auth = require('../auth');
 
 module.exports = function (app) {
+    // render signup page
     app.get('/signup', auth.middlewares.skipSignInUser, function (request, response, next) {
         response.render('pages/signup', {});
     });
@@ -26,7 +27,7 @@ module.exports = function (app) {
 
             response.render('pages/signup', viewData);
 
-            let host = env.isDevelopment() ? 'localhost:' + config.get('network:port') : 'mue.in.ua';
+            let host = env.isDevelopment() ? config.get('network:hostName') + ':' + config.get('network:port') : config.get('network:hostName');
             let confirmationLink = 'http://' + host + '/confirmation?confirmationId=' + user.confirmationId;
 
             action.execute('sendEmail', {
@@ -70,6 +71,7 @@ module.exports = function (app) {
         });
     });
 
+    // render signin page
     app.get('/signin?:continue', auth.middlewares.skipSignInUser, function (request, response, next) {
         response.render('pages/signin');
     });
@@ -89,12 +91,6 @@ module.exports = function (app) {
             response.redirect(redirectUrl);
         })(request, response, next);
     });
-
-    /*app.post('/signin?:continue', auth.middlewares.localSignIn, function (request, response, next) {
-     let redirectUrl = request.query.continue || config.get('config:urls:redirectAfterSignIn');
-
-     response.redirect(redirectUrl);
-     });*/
 
     app.get('/logout', function (request, response, next) {
         request.logout();

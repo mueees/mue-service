@@ -5,6 +5,7 @@
     "name": "mue-dev"
   },
   "network": {
-    "port": 20004
+    "port": 20004,
+    "hostName": "localhost"
   }
 }

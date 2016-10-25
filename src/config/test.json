@@ -5,6 +5,7 @@
     "name": "mue-test"
   },
   "network": {
-    "port": 30004
+    "port": 30004,
+    "hostName": "localhost"
   }
 }
