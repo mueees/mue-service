@@ -82,13 +82,22 @@ module.exports = function (app) {
                 response.render('pages/signin', {
                     errorMessage: err.message
                 });
-
                 return;
             }
 
-            let redirectUrl = request.query.continue || config.get('config:urls:redirectAfterSignIn');
+            // manual login current user
+            request.login(user, function (err) {
+                if (err) {
+                    log.error(err);
 
-            response.redirect(redirectUrl);
+                    response.redirect('/signin');
+                    return;
+                }
+
+                let redirectUrl = request.query.continue || config.get('config:urls:redirectAfterSignIn');
+
+                response.redirect(redirectUrl);
+            });
         })(request, response, next);
     });
 
