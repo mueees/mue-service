@@ -37,7 +37,7 @@ module.exports = function (app) {
 
                 from: config.get('email:from'),
                 to: user.email,
-                subjetc: 'Sign up confirmation',
+                subject: 'Sign up confirmation',
                 text: 'Well done! Please click to the link and confirm your email. ' + confirmationLink
             }).catch(function () {
                 log.error('Cannot send confirmation Id');
