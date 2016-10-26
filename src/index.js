@@ -19,6 +19,7 @@ let helmet = require('helmet');
 let session = require('express-session');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
+let log = require('mue-core/modules/log')(module);
 
 /*Modules*/
 let auth = require('./auth');
@@ -64,18 +65,10 @@ require('mue-core/modules/api-server')({
         // set up views engine
         app.set('views', __dirname + "/views");
         app.set('view engine', 'jade');
-
-        console.log('On init callback');
-    },
-
-    beforeStart: function () {
-        console.log('Before start callback');
     }
 });
 
 // connect to DB
-// TODO: uncomment after
-
 require('modules/db').initConnection({
  port: config.get('db:port'),
  name: config.get('db:name'),

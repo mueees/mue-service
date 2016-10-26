@@ -10,6 +10,8 @@ passport.use('local-signin', new LocalStrategy({
         passReqToCallback: true
     },
     function (request, email, password, done) {
+        log.debug('Initialize local signin');
+
         action.execute('requestToService', {
             service: 'security',
             method: 'POST',
@@ -19,6 +21,8 @@ passport.use('local-signin', new LocalStrategy({
                 password: password
             }
         }).then(function (user) {
+            log.debug('Sign in ');
+
             done(null, user);
         }, function (error) {
             done(error, null);

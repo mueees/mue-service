@@ -3,6 +3,7 @@
 let config = require('../config');
 let passport = require('passport');
 let assert = require('mue-core/modules/assert');
+let log = require('mue-core/modules/log')(module);
 
 passport.serializeUser(function(user, done) {
     done(null, user._id);
@@ -50,4 +51,6 @@ exports.middlewares = {
 exports.initialize = function (app) {
     app.use(passport.initialize());
     app.use(passport.session());
+
+    log.debug('Auth was initialized');
 };
