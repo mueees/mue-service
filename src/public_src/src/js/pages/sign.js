@@ -1,0 +1,1 @@
+require('../../scss/pages/sign.scss');

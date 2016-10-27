@@ -1,0 +1,14 @@
+.page-sign:before {
+  background-image: url("../../img/signin/background.jpg");
+}
+
+.page-sign form {
+  width: 340px;
+  margin: 21px auto;
+}
+
+@media (max-width: 479px) {
+  .page-sign form {
+    width: auto;
+  }
+}
