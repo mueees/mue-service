@@ -33,8 +33,8 @@ require('mue-core/modules/api-server')({
         //protect app from some well-known web vulnerabilities by setting HTTP headers appropriately
         app.use(helmet());
 
-        app.use(express.static('../mue-client'));
-        app.use('/m', express.static(__dirname + '/public'));
+        // set up public folder
+        app.use(express.static(__dirname + '/public'));
 
         app.use(cookieParser());
         app.use(bodyParser.urlencoded({extended: false}));
