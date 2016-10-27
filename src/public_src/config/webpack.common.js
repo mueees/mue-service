@@ -23,13 +23,6 @@ module.exports = {
     module: {
         loaders: [
             {
-                loader: "babel",
-                exclude: [
-                    helpers.root('node_modules')
-                ],
-                test: /\.js$/
-            },
-            {
                 test: /\.scss/,
                 include: helpers.root('src'),
                 loader: ExtractTextPlugin.extract("style", "css!resolve-url!sass?sourceMap")
