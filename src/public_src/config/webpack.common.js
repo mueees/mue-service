@@ -1,7 +1,6 @@
 'use strict';
 
 var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var helpers = require('./helpers');
 
@@ -10,7 +9,7 @@ module.exports = {
 
     entry: {
         general: './js/general.js',
-        signin: './js/pages/signin.js'
+        sign: './js/pages/sign.js'
     },
 
     plugins: [

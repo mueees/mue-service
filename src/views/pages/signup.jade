@@ -1,17 +1,27 @@
 extends ../layout
+
+block page_header
+    link(rel='stylesheet', href='/sign.css')
+
 block content
-    h1 Signup
+    div(class="page vertical-align text-xs-center")
+        div(class="page-content vertical-align-middle")
+            div(class="brand")
+                // img(class="brand-img", src="/img/brand/logo.jpg")
+                h2(class="brand-text") Galaxy
 
-    if locals.errorMessage
-        p #{locals.errorMessage}
-    if locals.successMessage
-        p #{locals.successMessage}
+            p Sign up to find interesting thing
 
-    div
-        form(method="POST")
-            div
-                input(type="text", name="email", required="true")
-            div
-                input(type="password", name="password", required="true")
-            div
-                button(type="submit") Signup
+            form(method="post")
+                div(class="form-group")
+                    label(class="sr-only", for="email") Email
+                    input(class="form-control", name="email", type="text", id="email", placeholder="youremail@mail.com", autofocus="true")
+
+                div(class="form-group")
+                    label(class="sr-only", for="password") Password
+                    input(class="form-control", name="password", type="password", id="password", placeholder="Password")
+
+                button(class="btn btn-primary btn-block") Sign up
+
+            p Have account already? Please go to &nbsp;
+                a(href="/signin") Sign In

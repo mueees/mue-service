@@ -1,7 +1,7 @@
 extends ../layout
 
 block page_header
-    link(rel='stylesheet', href='/signin.css')
+    link(rel='stylesheet', href='/sign.css')
 
 block content
     div(class="page vertical-align text-xs-center")
@@ -15,7 +15,7 @@ block content
             form(method="post")
                 div(class="form-group")
                     label(class="sr-only", for="email") Email
-                    input(class="form-control", name="email", type="text", id="email", placeholder="youremail@mail.com")
+                    input(class="form-control", name="email", type="text", id="email", placeholder="youremail@mail.com", autofocus="true")
 
                 div(class="form-group")
                     label(class="sr-only", for="password") Password
@@ -27,5 +27,5 @@ block content
 
                 button(class="btn btn-primary btn-block") Sign in
 
-            p Still no account? Please go to
+            p Still no account? Please go to &nbsp;
                 a(href="/signup") Sign Up
