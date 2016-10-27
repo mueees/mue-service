@@ -37,7 +37,7 @@ require('mue-core/modules/api-server')({
         app.use('/m', express.static(__dirname + '/public'));
 
         app.use(cookieParser());
-        app.use(bodyParser.urlencoded({ extended: false }));
+        app.use(bodyParser.urlencoded({extended: false}));
 
         app.use(
             session({
@@ -70,7 +70,7 @@ require('mue-core/modules/api-server')({
 
 // connect to DB
 require('modules/db').initConnection({
- port: config.get('db:port'),
- name: config.get('db:name'),
- host: config.get('db:host')
+    port: config.get('db:port'),
+    name: config.get('db:name'),
+    host: config.get('db:host')
 });
