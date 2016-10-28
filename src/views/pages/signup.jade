@@ -21,7 +21,17 @@ block content
                     label(class="sr-only", for="password") Password
                     input(class="form-control", name="password", type="password", id="password", placeholder="Password")
 
+                div(class="form-group")
+                    label(class="sr-only", for="confirm-password") Confirm password
+                    input(class="form-control", name="confirmPassword", type="password", id="confirm-password", placeholder="Confirm Password")
+
                 button(class="btn btn-primary btn-block") Sign up
+
+            if locals.errorMessage
+                div(class="alert dark alert-danger alert-dismissible") #{locals.errorMessage}
+
+            if locals.successMessage
+                div(class="alert dark alert-success alert-dismissible") #{locals.successMessage}
 
             p Have account already? Please go to &nbsp;
                 a(href="/signin") Sign In

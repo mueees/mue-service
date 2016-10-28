@@ -5,11 +5,11 @@ let passport = require('passport');
 let assert = require('mue-core/modules/assert');
 let log = require('mue-core/modules/log')(module);
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
     done(null, user._id);
 });
 
-passport.deserializeUser(function(id, done) {
+passport.deserializeUser(function (id, done) {
     let user = {
         _id: 123
     };
@@ -22,17 +22,12 @@ require('mue-core/modules/actions/request-to-service');
 
 /*Initialize strategies*/
 require('./strategies/local-signin');
-require('./strategies/local-signup');
 
 exports.strategy = function (name, callback) {
     assert.isDefined(name);
     assert.isString(name);
 
-    switch(name){
-        case 'local-signup':
-            return passport.authenticate('local-signup', callback);
-
-        break;
+    switch (name) {
         case 'local-signin':
             return passport.authenticate('local-signin', callback);
 

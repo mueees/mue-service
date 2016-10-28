@@ -16,33 +16,50 @@ module.exports = function (app) {
     });
 
     app.post('/signup', auth.middlewares.skipSignInUser, function (request, response, next) {
-        auth.strategy('local-signup', function (err, user) {
-            let viewData = {};
-
-            if (err) {
-                viewData.errorMessage = err.message;
-            } else {
-                viewData.successMessage = 'Well done! Confirm your email to complete your registration';
-            }
-
-            response.render('pages/signup', viewData);
-
-            let host = env.isDevelopment() ? config.get('network:hostName') + ':' + config.get('network:port') : config.get('network:hostName');
-            let confirmationLink = 'http://' + host + '/confirmation?confirmationId=' + user.confirmationId;
-
-            action.execute('sendEmail', {
-                service: config.get('email:service'),
-                user: config.get('email:user'),
-                password: config.get('email:password'),
-
-                from: config.get('email:from'),
-                to: user.email,
-                subject: 'Sign up confirmation',
-                text: 'Well done! Please click to the link and confirm your email. ' + confirmationLink
-            }).catch(function () {
-                log.error('Cannot send confirmation Id');
+        if (!request.body.email || !request.body.password ||
+            request.body.password !== request.body.confirmPassword) {
+            response.render('pages/signup', {
+                errorMessage: 'Invalid credentials'
             });
-        })(request, response, next);
+
+            return;
+        }
+
+        action.execute('requestToService', {
+            service: 'account',
+            method: 'POST',
+            url: '/signup',
+            data: {
+                email: request.body.email,
+                password: request.body.password
+            }
+        })
+            .then(function (user) {
+                response.render('pages/signup', {
+                    successMessage: 'Well done! Confirm your email to complete your registration'
+                });
+
+                let host = env.isDevelopment() ? config.get('network:hostName') + ':' + config.get('network:port') : config.get('network:hostName');
+                let confirmationLink = 'http://' + host + '/confirmation?confirmationId=' + user.confirmationId;
+
+                action.execute('sendEmail', {
+                    service: config.get('email:service'),
+                    user: config.get('email:user'),
+                    password: config.get('email:password'),
+
+                    from: config.get('email:from'),
+                    to: user.email,
+                    subject: 'Sign up confirmation',
+                    text: 'Well done! Please click to the link and confirm your email. ' + confirmationLink
+                }).catch(function () {
+                    log.error('Cannot send confirmation Id');
+                });
+            })
+            .catch(function (err) {
+                response.render('pages/signup', {
+                    errorMessage: err ? err.message : 'Invalid credentials'
+                });
+            });
     });
 
     app.get('/confirmation?:confirmationId', function (request, response, next) {
@@ -77,6 +94,14 @@ module.exports = function (app) {
     });
 
     app.post('/signin?:continue', auth.middlewares.skipSignInUser, function (request, response, next) {
+        if (!request.body.email || !request.body.password) {
+            response.render('pages/signin', {
+                errorMessage: 'Invalid credentials'
+            });
+
+            return;
+        }
+
         auth.strategy('local-signin', function (err, user) {
             if (err) {
                 response.render('pages/signin', {
