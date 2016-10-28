@@ -24,6 +24,9 @@ let log = require('mue-core/modules/log')(module);
 /*Modules*/
 let auth = require('./auth');
 
+// log Uncaught exception, Unhandled Rejection
+require('mue-core/modules/debug');
+
 // start api server
 require('mue-core/modules/api-server')({
     name: config.get('name'),
