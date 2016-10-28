@@ -1,0 +1,14 @@
+.page-home:before {
+  background-image: url("../../img/signin/background.jpg");
+}
+
+.page-home .home-description {
+  width: 340px;
+  margin: 21px auto;
+}
+
+@media (max-width: 479px) {
+  .page-sign .home-description {
+    width: auto;
+  }
+}

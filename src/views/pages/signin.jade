@@ -21,6 +21,9 @@ block content
                     label(class="sr-only", for="password") Password
                     input(class="form-control", name="password", type="password", id="password", placeholder="Password")
 
+                div(class="form-group clearfix")
+                    a(class="pull-xs-right", href="/forgot-password") Forgot password?
+
                 button(class="btn btn-primary btn-block") Sign in
 
             if locals.errorMessage

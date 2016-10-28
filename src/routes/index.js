@@ -10,9 +10,18 @@ let config = require('../config');
 let auth = require('../auth');
 
 module.exports = function (app) {
+    // render main page
+    app.get('/', function (request, response, next) {
+        response.render('pages/home', {
+            page: 'page-home'
+        });
+    });
+
     // render signup page
     app.get('/signup', auth.middlewares.skipSignInUser, function (request, response, next) {
-        response.render('pages/signup', {});
+        response.render('pages/signup', {
+            page: 'page-sign'
+        });
     });
 
     app.post('/signup', auth.middlewares.skipSignInUser, function (request, response, next) {
@@ -62,6 +71,7 @@ module.exports = function (app) {
             });
     });
 
+    // confirm user id
     app.get('/confirmation?:confirmationId', function (request, response, next) {
         action.execute('requestToService', {
             service: 'account',
@@ -88,9 +98,17 @@ module.exports = function (app) {
         });
     });
 
+    app.get('/forgot-password', auth.middlewares.skipSignInUser, function (request, response, next) {
+        response.render('pages/forgot-password', {
+            page: 'forgot-password'
+        });
+    });
+
     // render signin page
     app.get('/signin?:continue', auth.middlewares.skipSignInUser, function (request, response, next) {
-        response.render('pages/signin');
+        response.render('pages/signin', {
+            page: 'page-sign'
+        });
     });
 
     app.post('/signin?:continue', auth.middlewares.skipSignInUser, function (request, response, next) {

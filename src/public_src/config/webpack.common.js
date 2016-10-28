@@ -9,7 +9,9 @@ module.exports = {
 
     entry: {
         general: './js/general.js',
-        sign: './js/pages/sign.js'
+        sign: './js/pages/sign.js',
+        home: './js/pages/home.js',
+        "forgot-password": './js/pages/forgot-password.js'
     },
 
     plugins: [

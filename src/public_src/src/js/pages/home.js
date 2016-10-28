@@ -1,0 +1,1 @@
+require('../../scss/pages/home.scss');
