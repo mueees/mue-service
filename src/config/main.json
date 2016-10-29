@@ -6,7 +6,8 @@
     "urls": {
       "redirectAfterSignIn": "/",
       "redirectAfterSignUp": "/",
-      "redirectAfterLogout": "/"
+      "redirectAfterLogout": "/",
+      "restorePassword": "/restore-password"
     }
   }
 }

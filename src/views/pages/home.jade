@@ -12,5 +12,10 @@ block content
 
             p(class="home-description") About 3 years ago programming absorbed me. I like frontend and backend development. I started work under the own project to learn and understand them deeply. I have had a long way to go before I could ​present it to the ​public.
 
-            p Have account already? Please go to &nbsp;
-                a(href="/signin") Sign In
+            if locals.user.email
+                p #{locals.user.email} &nbsp;
+                    a(href="/logout") Logout
+            else
+                p Have account already? Please go to &nbsp;
+                    a(href="/signin") Sign In
+
